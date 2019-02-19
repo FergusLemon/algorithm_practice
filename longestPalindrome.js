@@ -24,3 +24,35 @@ var longestPalindrome = function(s) {
     }
     return ans;
 };
+
+// Expand around the center character
+
+const expandAroundCenter = function(str, indexOne, indexTwo) {
+    const len = str.length;
+    var start = indexOne,
+        end = indexTwo;
+    
+    while(str[start] === str[end] && start >= 0 && end <= len - 1) {
+        start--;
+        end++;
+    }
+    return str.substring(start + 1, end);
+};
+    
+var longestPalindrome = function(str) {
+    const len = str.length;
+    let longest = "";
+    if (str === null || len < 1) return longest;
+    
+    for(var i = 0; i < len; i++) {
+        let tempSubstring = expandAroundCenter(str, i, i);
+        if (tempSubstring.length > longest.length) {
+            longest = tempSubstring;
+        }
+        tempSubstring = expandAroundCenter(str, i, i+1);
+        if (tempSubstring.length > longest.length) {
+            longest = tempSubstring;
+        }
+    }
+    return longest;
+};
