@@ -12,8 +12,8 @@ function listPosition(word) {
 
   let characterCountObj = {};
   const characterArr = word.split('');
-  const sorted = word.split('').sort();
-  if (sorted === word.split('')) { return 1; };
+  const reference = word.split('').sort();
+  if (reference === word.split('')) { return 1; };
   for (let char of characterArr) {
     if (characterCountObj[char]) {
       characterCountObj[char] += 1;
@@ -30,9 +30,10 @@ function listPosition(word) {
     }
     return denominator;
   }
+
   let max = Math.ceil(factorial(n) / calculateDenominator(characterCountObj));
   let min = 1;
-  if (sorted.join('') === word.split('').reverse().join('')) { return max; };
+  if (reference.join('') === word.split('').reverse().join('')) { return max; };
 
   const updateCountObj = (obj, char) => {
     obj[char] && obj[char] > 1 ? obj[char] -= 1 : delete obj[char];
@@ -40,18 +41,19 @@ function listPosition(word) {
 
   for (let i = 0; i < n-1; i++) {
     let char = characterArr[i];
-    let lhs = sorted.indexOf(char);
-    let rhs = (sorted.length -1) - (sorted.lastIndexOf(char));
-    let total = lhs + rhs;
-    let minIncreaseProportion = lhs / total;
-    let maxReductionProportion = rhs / total;
+    let leftHandside = reference.indexOf(char);
+    let rightHandside = (reference.length -1) - (reference.lastIndexOf(char));
+    let total = leftHandside + rightHandside;
+    let minIncreaseProportion = leftHandside / total;
+    let maxReductionProportion = rightHandside / total;
     let currentDifference = max - min;
-    sorted.splice(lhs, 1);
+    reference.splice(leftHandside, 1);
     updateCountObj(characterCountObj, char);
-    let remainingPerms = (factorial(sorted.length) / calculateDenominator(characterCountObj)) - 1;
-    let toDishOut = currentDifference - remainingPerms;
-    min += Math.ceil(toDishOut * minIncreaseProportion);
-    max -= Math.ceil(toDishOut * maxReductionProportion);
+    let remainingPermutations = (factorial(reference.length) /
+      calculateDenominator(characterCountObj)) - 1;
+    let toDistribute = currentDifference - remainingPermutations;
+    min += Math.ceil(toDistribute * minIncreaseProportion);
+    max -= Math.ceil(toDistribute * maxReductionProportion);
   };
   return min;
 }
