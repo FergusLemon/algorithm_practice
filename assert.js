@@ -194,6 +194,7 @@ function runAll() {
   const set1Copy = new Set([1, 2, 3, 4, "a", "b", "c"]);
   const set2 = new Set([10, 2, 3, 4, "a", "b", "c"]);
   const set3 = new Set([10, 2, 3, 4, "a", "b"]);
+  const set4 = new Set([1, 2, 3, 4, "a", "b", "c", "d"]);
 
   // Run the tests
   let assertionFailures = [];
@@ -218,7 +219,8 @@ function runAll() {
   runTest('Test 19: ', assertionFailures, formatPath, getType);
   runTest('Test 20: ', assertionFailures, set1, set1Copy);
   runTest('Test 21: ', assertionFailures, set1, set2);
-  runTest('Test 21: ', assertionFailures, set1, set3);
+  runTest('Test 22: ', assertionFailures, set1, set4);
+  runTest('Test 23: ', assertionFailures, set1, set3);
 
    //Output the results
    assertionFailures.forEach(failure => console.log(failure));
