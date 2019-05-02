@@ -56,3 +56,9 @@ var longestPalindrome = function(str) {
     }
     return longest;
 };
+
+// simple is Palindrome
+
+const isPalindrome = (str) => {
+   return str === str.split('').reverse().join('');
+};
