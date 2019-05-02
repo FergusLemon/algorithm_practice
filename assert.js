@@ -115,17 +115,7 @@ function assertEquals(message, expected, actual) {
   return false;
 };
 
-
-/* -- Test running code:  --- */
-
-/**
- * Runs a "assertEquals" test.
- *
- * @param {String} message The initial message to pass
- * @param {Array} assertionFailures List of messages that will be displayed on the UI for evaluation
- * @param {*} expected Expected item
- * @param {*} actual The actual item
- */
+////////////////////////////////////////////////////////////////////
 function runTest(message, assertionFailures, expected, actual) {
   try {
     assertEquals(message, expected, actual);
